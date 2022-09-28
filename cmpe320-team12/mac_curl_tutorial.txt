@@ -1,0 +1,25 @@
+Executing Curl on Mac (tutorial):
+
+Note: All commands are executed through terminal. Access this using CMD-space and typing terminal.
+
+
+1) Download homebrew (if you haven't already). Execute the command /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+You will have to allow access to sudo using your password and allow the execution to proceed.
+
+2) If you are running on an M1 Chip you will need to run the line:
+echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.zshrc
+
+Close terminal and then re-open it after running this line.
+
+3) Pull the Git repository and set it up in an executable. You will need to include the following in the CMake file in addition to the other things already in the CMake.
+
+set(CURL_LIBRARY "-lcurl")
+find_package(CURL REQUIRED)
+
+include_directories(${CURL_INCLUDE_DIR})
+target_link_libraries(CMPEProject ${CURL_LIBRARIES})
+
+include_directories(/usr/local/opt/curl/include/)
+
+The updated CMake file has been (or will soon be) pushed to the Bitbucket and you can reference it there.
